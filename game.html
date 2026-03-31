@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Number Guessing Game - WebDev</title>
+  <title>Number Game — LoopLab</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="game.css" />
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- ===== HEADER ===== -->
   <header>
     <nav>
-      <div class="nav-logo">Web<span>Dev</span></div>
+      <div class="nav-logo">Loop<span>Lab</span></div>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -27,111 +27,116 @@
   <main class="game-main">
     <div class="container">
 
-      <!-- PAGE HEADER -->
-      <div class="game-page-header">
-        <p class="section-label">Mini Game</p>
+      <!-- Page Header -->
+      <div class="game-header">
+        <span class="section-eyebrow">Mini Game</span>
         <h1 class="section-title">Number Guessing Game</h1>
-        <p class="section-desc">I am thinking of a number between 1 and 100. Can you guess what it is? Use the hints to narrow it down!</p>
+        <p class="section-sub">I'm thinking of a number between 1 and 100. Can you find it?</p>
       </div>
 
-      <!-- GAME CARD -->
+      <!-- Game Card -->
       <div class="game-card">
 
-        <!-- HOW TO PLAY -->
-        <div class="how-to-play">
+        <!-- Instructions -->
+        <div class="instructions">
           <h3>How to Play</h3>
           <ol>
-            <li>The game secretly picks a random number from 1 to 100</li>
-            <li>Type your guess in the box and press "Submit Guess"</li>
-            <li>You will get a hint: too high or too low</li>
-            <li>Keep guessing until you find the number!</li>
+            <li>The game picks a secret number from 1 to 100</li>
+            <li>Type your guess and press <strong>Submit Guess</strong></li>
+            <li>I'll tell you if it's too high or too low</li>
+            <li>Keep guessing until you find it!</li>
           </ol>
         </div>
 
-        <!-- GAME STATUS -->
-        <div class="game-status-bar">
-          <div class="status-item">
-            <span class="status-label">Attempts</span>
-            <span class="status-val" id="attempts">0</span>
+        <!-- Stats -->
+        <div class="game-stats">
+          <div class="stat-box">
+            <span class="stat-label">Attempts</span>
+            <span class="stat-value" id="attempts">0</span>
           </div>
-          <div class="status-item">
-            <span class="status-label">Range</span>
-            <span class="status-val" id="range-display">1 - 100</span>
+          <div class="stat-box">
+            <span class="stat-label">Range</span>
+            <span class="stat-value" id="range-display">1 – 100</span>
           </div>
-          <div class="status-item">
-            <span class="status-label">Best Score</span>
-            <span class="status-val" id="best-score">--</span>
+          <div class="stat-box">
+            <span class="stat-label">Best Score</span>
+            <span class="stat-value" id="best-score">—</span>
           </div>
         </div>
 
-        <!-- HINT / MESSAGE -->
+        <!-- Hint -->
         <div class="hint-box" id="hint-box">
           <div class="hint-icon" id="hint-icon">?</div>
           <p class="hint-text" id="hint-text">Make your first guess to get started!</p>
         </div>
 
-        <!-- TEMPERATURE METER -->
-        <div class="temp-meter" id="temp-meter">
-          <span class="temp-label cold">Cold</span>
-          <div class="temp-bar-track">
-            <div class="temp-bar-fill" id="temp-fill"></div>
-          </div>
-          <span class="temp-label hot">Hot</span>
-        </div>
-
-        <!-- INPUT AREA -->
+        <!-- Input -->
         <div class="guess-area" id="guess-area">
           <input
             type="number"
             id="guess-input"
             class="guess-input"
-            placeholder="Enter a number 1-100"
-            min="1"
-            max="100"
+            placeholder="Enter a number 1–100"
+            min="1" max="100"
             autocomplete="off"
           />
           <button class="btn btn-primary" id="submit-btn" onclick="submitGuess()">Submit Guess</button>
         </div>
-
         <p class="input-error" id="input-error"></p>
 
-        <!-- HISTORY -->
-        <div class="guess-history" id="guess-history">
+        <!-- History -->
+        <div class="guess-history">
           <h4>Your Guesses</h4>
           <div class="history-list" id="history-list">
-            <p class="no-guesses">No guesses yet. Give it a try!</p>
+            <p class="no-guesses">No guesses yet — give it a try!</p>
           </div>
         </div>
 
-        <!-- WIN STATE -->
-        <div class="win-state" id="win-state" style="display:none;">
-          <div class="win-icon">&#10003;</div>
+        <!-- Win State -->
+        <div class="win-state" id="win-state" style="display: none;">
+          <div class="win-icon">✓</div>
           <h2 class="win-title">You got it!</h2>
           <p class="win-message" id="win-message"></p>
-          <button class="btn btn-mint" onclick="resetGame()">Play Again</button>
+          <button class="btn btn-green" onclick="resetGame()">Play Again</button>
         </div>
 
-        <!-- RESET BUTTON -->
+        <!-- Reset -->
         <div class="game-actions" id="game-actions">
-          <button class="btn btn-outline" onclick="resetGame()">Start New Game</button>
+          <button class="btn btn-ghost" onclick="resetGame()">Start New Game</button>
         </div>
 
       </div>
-
     </div>
   </main>
 
-  <!-- FOOTER -->
+  <!-- ===== FOOTER ===== -->
   <footer>
-    <div class="footer-inner">
-      <div class="footer-logo">WebDev</div>
-      <ul class="footer-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="game.html">Number Game</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-logo">Loop<span>Lab</span></div>
+        <p>A Web Development course project by three students learning to build things on the internet.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="game.html">Number Game</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>The Team</h4>
+        <ul>
+          <li><a href="index.html#members">Agrata Shrestha</a></li>
+          <li><a href="index.html#members">Paru Maharjan</a></li>
+          <li><a href="index.html#members">Subista Kunwar</a></li>
+        </ul>
+      </div>
     </div>
-    <p class="footer-copy container">Made with care as part of our Web Development course project. All rights reserved.</p>
+    <div class="footer-bottom">
+      <p>&copy; 2025 LoopLab. Made for our Web Development course.</p>
+      <p>Built with HTML, CSS &amp; JavaScript.</p>
+    </div>
   </footer>
 
   <script src="nav.js"></script>
