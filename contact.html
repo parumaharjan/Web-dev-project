@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact Us - WebDev</title>
+  <title>Contact — LoopLab</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="contact.css" />
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- ===== HEADER ===== -->
   <header>
     <nav>
-      <div class="nav-logo">Web<span>Dev</span></div>
+      <div class="nav-logo">Loop<span>Lab</span></div>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -31,99 +31,73 @@
 
         <!-- LEFT: Info -->
         <div class="contact-info">
+          <span class="section-eyebrow">Get in Touch</span>
           <h1 class="section-title">Contact Us</h1>
-          <p class="section-desc">Have a question about our project? Want to give us feedback? We would love to hear from you.</p>
+          <p class="section-sub">Have a question or feedback about our project? We'd love to hear from you.</p>
 
           <div class="info-cards">
-
             <div class="info-card">
-              <div class="info-icon" style="background: var(--pink);">@</div>
+              <div class="info-icon" style="background: var(--soft-pink);">@</div>
               <div>
                 <h4>Email</h4>
-                <p>team@webdev-project.com</p>
+                <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a4d0c1c5c9e4c8cbcbd4c8c5c689d4d6cbcec1c7d08ac7cbc9">[email&#160;protected]</a></p>
               </div>
             </div>
-
             <div class="info-card">
-              <div class="info-icon" style="background: var(--sky);">i</div>
+              <div class="info-icon" style="background: var(--soft-blue);">i</div>
               <div>
-                <h4>Project Info</h4>
-                <p>This is a course project for our Web Development class.</p>
+                <h4>About</h4>
+                <p>This is a Web Development course project.</p>
               </div>
             </div>
-
             <div class="info-card">
-              <div class="info-icon" style="background: var(--mint);">t</div>
+              <div class="info-icon" style="background: var(--soft-green);">✓</div>
               <div>
                 <h4>Response Time</h4>
-                <p>We aim to reply within 1-2 business days.</p>
+                <p>We aim to reply within 1–2 business days.</p>
               </div>
             </div>
-
           </div>
 
-          <div class="info-note">
-            <p>Fields marked with <span class="required-star">*</span> are required.</p>
-          </div>
+          <p class="info-note">Fields marked <span class="req">*</span> are required.</p>
         </div>
 
         <!-- RIGHT: Form -->
         <div class="contact-form-wrap">
 
-          <!-- SUCCESS STATE -->
-          <div class="form-success" id="form-success" style="display:none;">
-            <div class="success-icon">ok</div>
+          <!-- Success state (hidden by default) -->
+          <div class="form-success" id="form-success" style="display: none;">
+            <div class="success-icon">✓</div>
             <h3>Message Sent!</h3>
-            <p>Thank you for reaching out. We will get back to you soon.</p>
-            <button class="btn btn-outline" onclick="resetForm()">Send Another Message</button>
+            <p>Thanks for reaching out — we'll get back to you soon.</p>
+            <button class="btn btn-ghost" onclick="resetForm()">Send Another</button>
           </div>
 
-          <!-- FORM -->
+          <!-- Form -->
           <form class="contact-form" id="contact-form" novalidate>
 
             <div class="form-row">
               <div class="form-group">
-                <label for="first-name" class="form-label">First Name <span class="required-star">*</span></label>
-                <input
-                  type="text"
-                  id="first-name"
-                  name="first-name"
-                  class="form-input"
-                  placeholder="Alex"
-                  autocomplete="given-name"
-                />
+                <label for="first-name" class="form-label">First Name <span class="req">*</span></label>
+                <input type="text" id="first-name" class="form-input" placeholder="Alex" autocomplete="given-name" />
                 <span class="field-error" id="error-first-name"></span>
               </div>
               <div class="form-group">
-                <label for="last-name" class="form-label">Last Name <span class="required-star">*</span></label>
-                <input
-                  type="text"
-                  id="last-name"
-                  name="last-name"
-                  class="form-input"
-                  placeholder="Johnson"
-                  autocomplete="family-name"
-                />
+                <label for="last-name" class="form-label">Last Name <span class="req">*</span></label>
+                <input type="text" id="last-name" class="form-input" placeholder="Johnson" autocomplete="family-name" />
                 <span class="field-error" id="error-last-name"></span>
               </div>
             </div>
 
             <div class="form-group">
-              <label for="email" class="form-label">Email Address <span class="required-star">*</span></label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                class="form-input"
-                placeholder="you@example.com"
-                autocomplete="email"
-              />
+              <label for="email" class="form-label">Email <span class="req">*</span></label>
+              <input type="email" id="email" class="form-input" placeholder="you@example.com" autocomplete="email" />
               <span class="field-error" id="error-email"></span>
             </div>
 
             <div class="form-group">
-              <label for="subject" class="form-label">Subject <span class="required-star">*</span></label>
-              <select id="subject" name="subject" class="form-input form-select">
+              <label for="subject" class="form-label">Subject <span class="req">*</span></label>
+              <select id="subject" class="form-input form-select">
                 <option value="">Choose a subject...</option>
                 <option value="feedback">Project Feedback</option>
                 <option value="question">General Question</option>
@@ -134,14 +108,8 @@
             </div>
 
             <div class="form-group">
-              <label for="message" class="form-label">Message <span class="required-star">*</span></label>
-              <textarea
-                id="message"
-                name="message"
-                class="form-input form-textarea"
-                placeholder="Write your message here..."
-                rows="5"
-              ></textarea>
+              <label for="message" class="form-label">Message <span class="req">*</span></label>
+              <textarea id="message" class="form-input form-textarea" placeholder="Write your message here..." rows="5"></textarea>
               <div class="char-count">
                 <span class="field-error" id="error-message"></span>
                 <span class="char-counter"><span id="char-current">0</span> / 500</span>
@@ -150,9 +118,9 @@
 
             <div class="form-group">
               <label class="checkbox-label">
-                <input type="checkbox" id="agree" name="agree" class="checkbox-input" />
+                <input type="checkbox" id="agree" class="checkbox-input" />
                 <span class="checkbox-box"></span>
-                <span class="checkbox-text">I agree that this is a school project and not a real contact form.</span>
+                <span class="checkbox-text">I understand this is a school project and not a real contact form.</span>
               </label>
               <span class="field-error" id="error-agree"></span>
             </div>
@@ -160,28 +128,36 @@
             <button type="submit" class="btn btn-primary submit-btn" id="submit-btn">Send Message</button>
 
           </form>
-
         </div>
 
       </div>
-
     </div>
   </main>
 
-  <!-- FOOTER -->
+  <!-- ===== FOOTER ===== -->
   <footer>
-    <div class="footer-inner">
-      <div class="footer-logo">WebDev</div>
-      <ul class="footer-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="game.html">Number Game</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-logo">Loop<span>Lab</span></div>
+        <p>A Web Development course project by three students learning to build things on the internet.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="game.html">Number Game</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>The Team</h4>
+        <ul>
+          <li><a href="index.html#members">Agrata Shrestha</a></li>
+          <li><a href="index.html#members">Paru Maharjan</a></li>
+          <li><a href="index.html#members">Subista Kunwar</a></li>
+        </ul>
+      </div>
     </div>
-    <p class="footer-copy container">Made with care as part of our Web Development course project. All rights reserved.</p>
-  </footer>
-
-  <script src="nav.js"></script>
-  <script src="contact.js"></script>
-</body>
-</html>
+    <div class="footer-bottom">
+      <p>&copy; 2025 LoopLab. Made for our Web Development course.</p>
+      <p>Built with HTML, CSS &amp;
