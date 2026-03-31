@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WebDev Journey - Home</title>
+  <title>LoopLab — Web Development Journey</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="index.css" />
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- ===== HEADER ===== -->
   <header>
     <nav>
       <div class="nav-logo">Loop<span>Lab</span></div>
@@ -26,92 +26,91 @@
 
   <main>
 
-    <!-- HERO SECTION -->
+    <!-- ===== HERO ===== -->
     <section class="hero">
-      <div class="hero-inner container">
+      <div class="container hero-inner">
         <div class="hero-text">
-          <div class="badge hero-badge" style="background: var(--yellow); color: var(--text-mid);">Project 1 - Group Website</div>
-          <h1 class="hero-title">Our Web Development <em>Journey</em></h1>
+          <span class="section-eyebrow">Project 1 — Group Website</span>
+          <h1 class="hero-title">Our Web Dev<br><em>Journey</em></h1>
           <p class="hero-desc">
-            A showcase of everything we have learned — from the fundamentals of HTML and CSS to interactive JavaScript. Built with care, curiosity, and a lot of debugging.
+            A showcase of everything we have learned — from HTML and CSS basics to interactive JavaScript. Built with curiosity, teamwork, and a lot of debugging.
           </p>
           <div class="hero-btns">
             <a href="#topics" class="btn btn-primary">See What We Learned</a>
-            <a href="#members" class="btn btn-outline">Meet the Team</a>
+            <a href="#members" class="btn btn-ghost">Meet the Team</a>
           </div>
         </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-blob">
+            <div class="blob-card bc1"><span>HTML</span></div>
+            <div class="blob-card bc2"><span>CSS</span></div>
+            <div class="blob-card bc3"><span>JS</span></div>
+            <div class="blob-dot bd1"></div>
+            <div class="blob-dot bd2"></div>
+          </div>
+        </div>
+      </div>
     </section>
 
-
-    <!-- TOPICS SECTION -->
+    <!-- ===== TOPICS ===== -->
     <section class="section" id="topics">
       <div class="container">
-        <p class="section-label">Curriculum</p>
-        <h2 class="section-title">Topics We Learned</h2>
-        <p class="section-desc">Here is everything we covered throughout this course, organized by category.</p>
+        <div class="section-header">
+          <span class="section-eyebrow">Curriculum</span>
+          <h2 class="section-title">Topics We Learned</h2>
+          <p class="section-sub">Here is everything we covered throughout this course, organized by category.</p>
+        </div>
 
         <div class="topics-grid">
 
-          <div class="topic-category">
-            <div class="topic-category-header" style="background:var(--peach);">
-              <span class="tc-icon">H</span>
-              <h3>HTML Fundamentals</h3>
-            </div>
-            <ul class="topic-list">
+          <div class="topic-card">
+            <div class="topic-icon" style="background: var(--soft-pink);">H</div>
+            <h3>HTML Fundamentals</h3>
+            <ul>
               <li>Document Structure &amp; Doctype</li>
               <li>Semantic HTML Elements</li>
               <li>Headings, Paragraphs &amp; Text</li>
-              <li>Links and Navigation</li>
-              <li>Images and Media</li>
+              <li>Links, Images &amp; Media</li>
               <li>Forms and Input Fields</li>
               <li>Tables and Lists</li>
             </ul>
           </div>
 
-          <div class="topic-category">
-            <div class="topic-category-header" style="background:var(--lavender);">
-              <span class="tc-icon">C</span>
-              <h3>CSS Styling</h3>
-            </div>
-            <ul class="topic-list">
+          <div class="topic-card">
+            <div class="topic-icon" style="background: var(--soft-purple);">C</div>
+            <h3>CSS Styling</h3>
+            <ul>
               <li>Selectors and Specificity</li>
               <li>Box Model</li>
               <li>Flexbox Layout</li>
               <li>CSS Grid</li>
               <li>Colors and Typography</li>
               <li>Responsive Design &amp; Media Queries</li>
-              <li>Transitions and Animations</li>
             </ul>
           </div>
 
-          <div class="topic-category">
-            <div class="topic-category-header" style="background:var(--mint);">
-              <span class="tc-icon">JS</span>
-              <h3>JavaScript Basics</h3>
-            </div>
-            <ul class="topic-list">
-              <li>Variables, Data Types</li>
+          <div class="topic-card">
+            <div class="topic-icon" style="background: var(--soft-green);">JS</div>
+            <h3>JavaScript Basics</h3>
+            <ul>
+              <li>Variables &amp; Data Types</li>
               <li>Functions and Scope</li>
               <li>DOM Manipulation</li>
               <li>Event Listeners</li>
               <li>Conditionals and Loops</li>
-              <li>Arrays and Objects</li>
               <li>Form Validation</li>
             </ul>
           </div>
 
-          <div class="topic-category">
-            <div class="topic-category-header" style="background:var(--sky);">
-              <span class="tc-icon">+</span>
-              <h3>Additional Skills</h3>
-            </div>
-            <ul class="topic-list">
+          <div class="topic-card">
+            <div class="topic-icon" style="background: var(--soft-blue);">+</div>
+            <h3>Additional Skills</h3>
+            <ul>
               <li>Version Control (Git)</li>
               <li>Browser Developer Tools</li>
               <li>Accessibility Basics</li>
               <li>File Organization</li>
               <li>Debugging Techniques</li>
-              <li>Web Performance Tips</li>
               <li>Deploying a Website</li>
             </ul>
           </div>
@@ -120,19 +119,21 @@
       </div>
     </section>
 
-    <!-- MEMBERS SECTION -->
+    <!-- ===== TEAM ===== -->
     <section class="section members-section" id="members">
       <div class="container">
-        <p class="section-label">The Team</p>
-        <h2 class="section-title">Group Members</h2>
-        <p class="section-desc">The people who made this project happen.</p>
+        <div class="section-header">
+          <span class="section-eyebrow">The Team</span>
+          <h2 class="section-title">Meet the Group</h2>
+          <p class="section-sub">Three people who built this project together.</p>
+        </div>
 
         <div class="members-grid">
 
           <div class="member-card card">
-            <div class="member-avatar" style="background: var(--pink);">A</div>
-            <h3 class="member-name">Alex Johnson</h3>
-            <p class="member-role badge" style="background: var(--yellow); color: var(--text-mid);">Team Lead</p>
+            <div class="member-avatar" style="background: var(--soft-pink);">A</div>
+            <h3 class="member-name">Agrata Shrestha</h3>
+            <span class="badge" style="background: var(--soft-yellow); color: var(--text-mid);">Team Lead</span>
             <p class="member-bio">Focused on HTML structure and page architecture. Loves clean, readable code.</p>
             <div class="member-skills">
               <span class="skill-tag">HTML</span>
@@ -142,9 +143,9 @@
           </div>
 
           <div class="member-card card">
-            <div class="member-avatar" style="background: var(--mint);">S</div>
-            <h3 class="member-name">Sara Kim</h3>
-            <p class="member-role badge" style="background: var(--pink); color: var(--text-mid);">UI Designer</p>
+            <div class="member-avatar" style="background: var(--soft-purple);">P</div>
+            <h3 class="member-name">Paru Maharjan</h3>
+            <span class="badge" style="background: var(--soft-pink); color: var(--text-mid);">UI Designer</span>
             <p class="member-bio">Handled all the styling and layout. Has a great eye for color and typography.</p>
             <div class="member-skills">
               <span class="skill-tag">CSS</span>
@@ -154,9 +155,9 @@
           </div>
 
           <div class="member-card card">
-            <div class="member-avatar" style="background: var(--sky);">M</div>
-            <h3 class="member-name">Marco Rivera</h3>
-            <p class="member-role badge" style="background: var(--mint); color: var(--text-mid);">Developer</p>
+            <div class="member-avatar" style="background: var(--soft-green);">S</div>
+            <h3 class="member-name">Subista Kunwar</h3>
+            <span class="badge" style="background: var(--soft-green); color: var(--text-mid);">Developer</span>
             <p class="member-bio">Built all the JavaScript features including the number guessing game and form validation.</p>
             <div class="member-skills">
               <span class="skill-tag">JavaScript</span>
@@ -165,46 +166,52 @@
             </div>
           </div>
 
-          <div class="member-card card">
-            <div class="member-avatar" style="background: var(--lavender);">P</div>
-            <h3 class="member-name">Priya Sharma</h3>
-            <p class="member-role badge" style="background: var(--lavender); color: var(--text-mid);">Content</p>
-            <p class="member-bio">Wrote all the content and made sure everything was beginner-friendly and easy to read.</p>
-            <div class="member-skills">
-              <span class="skill-tag">HTML</span>
-              <span class="skill-tag">CSS</span>
-              <span class="skill-tag">Writing</span>
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
 
-    <!-- CTA SECTION -->
-    <section class="cta-section">
+    <!-- ===== CTA ===== -->
+    <section class="section cta-section">
       <div class="container">
         <div class="cta-box">
-          <h2 class="cta-title">Want to play our game?</h2>
-          <p class="cta-desc">We built a number guessing game from scratch using JavaScript. Give it a try!</p>
-          <a href="game.html" class="btn btn-primary">Play Number Game</a>
+          <span class="section-eyebrow">Mini Game</span>
+          <h2 class="cta-title">Try Our Number Game!</h2>
+          <p class="cta-desc">We built a number guessing game from scratch using JavaScript. Can you find the secret number?</p>
+          <a href="game.html" class="btn btn-primary">Play Now</a>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- FOOTER -->
+  <!-- ===== FOOTER ===== -->
   <footer>
-    <div class="footer-inner">
-      <div class="footer-logo">WebDev</div>
-      <ul class="footer-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="game.html">Number Game</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-logo">Loop<span>Lab</span></div>
+        <p>A Web Development course project by three students learning to build things on the internet.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="game.html">Number Game</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>The Team</h4>
+        <ul>
+          <li><a href="#members">Agrata Shrestha</a></li>
+          <li><a href="#members">Paru Maharjan</a></li>
+          <li><a href="#members">Subista Kunwar</a></li>
+        </ul>
+      </div>
     </div>
-    <p class="footer-copy container">Made with care as part of our Web Development course project. All rights reserved.</p>
+    <div class="footer-bottom">
+      <p>&copy; 2025 LoopLab. Made for our Web Development course.</p>
+      <p>Built with HTML, CSS &amp; JavaScript.</p>
+    </div>
   </footer>
 
   <script src="nav.js"></script>
