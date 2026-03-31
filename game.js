@@ -1,64 +1,65 @@
 // ===== NUMBER GUESSING GAME =====
 
-let secretNumber = 0;
-let attempts = 0;
-let bestScore = null;
-let gameOver = false;
-let guessHistory = [];
-let low = 1;
-let high = 100;
+// Game state variables
+var secretNumber = 0;   // the number the player must guess
+var attempts     = 0;   // how many guesses so far
+var bestScore    = null; // fewest guesses ever (saved during the session)
+var gameOver     = false;
+var low  = 1;   // lowest possible answer (narrows as player guesses)
+var high = 100; // highest possible answer
 
-// Initialize on page load
+// Start the game when the page loads
 window.addEventListener('DOMContentLoaded', function () {
   startNewGame();
 
-  // Allow Enter key to submit
-  const input = document.getElementById('guess-input');
-  if (input) {
-    input.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') submitGuess();
-    });
-  }
+  // Also allow pressing Enter key to submit a guess
+  document.getElementById('guess-input').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') submitGuess();
+  });
 });
 
+// ===== START / RESET =====
 function startNewGame() {
+  // Pick a random number between 1 and 100
   secretNumber = Math.floor(Math.random() * 100) + 1;
+
+  // Reset all tracking variables
   attempts = 0;
   gameOver = false;
-  guessHistory = [];
-  low = 1;
+  low  = 1;
   high = 100;
 
-  // Reset UI
+  // Reset the UI
   updateAttempts(0);
   updateRange(1, 100);
   setHint('default', '?', 'Make your first guess to get started!');
-  setTempMeter(0);
   clearHistory();
   clearError();
 
-  document.getElementById('guess-input').value = '';
+  document.getElementById('guess-input').value    = '';
   document.getElementById('guess-input').disabled = false;
-  document.getElementById('submit-btn').disabled = false;
-  document.getElementById('win-state').style.display = 'none';
-  document.getElementById('guess-area').style.display = 'flex';
+  document.getElementById('submit-btn').disabled  = false;
+  document.getElementById('win-state').style.display    = 'none';
+  document.getElementById('guess-area').style.display   = 'flex';
   document.getElementById('game-actions').style.display = 'flex';
   document.getElementById('guess-input').focus();
 
-  // Update best score display
-  const bestEl = document.getElementById('best-score');
-  bestEl.textContent = bestScore !== null ? bestScore + ' tries' : '--';
+  // Show best score (or dash if no games finished yet)
+  document.getElementById('best-score').textContent =
+    bestScore !== null ? bestScore + ' tries' : '—';
 }
 
+// ===== HANDLE A GUESS =====
 function submitGuess() {
-  if (gameOver) return;
+  if (gameOver) return; // ignore clicks after game ends
 
-  const input = document.getElementById('guess-input');
-  const rawValue = input.value.trim();
-  const guess = parseInt(rawValue);
+  var input    = document.getElementById('guess-input');
+  var rawValue = input.value.trim();
+  var guess    = parseInt(rawValue); // convert text to number
 
-  // Validation
   clearError();
+
+  // Validate: must be a number between 1 and 100
   if (rawValue === '' || isNaN(guess)) {
     showError('Please enter a number.');
     input.classList.add('input-err');
@@ -76,28 +77,23 @@ function submitGuess() {
   attempts++;
   updateAttempts(attempts);
 
-  const distance = Math.abs(guess - secretNumber);
-  const warmth = getWarmth(distance);
-
+  // Compare guess to secret number
   if (guess < secretNumber) {
-    // Too low
-    if (guess > low) low = guess;
+    if (guess > low) low = guess; // narrow the range
     updateRange(low, high);
-    setHint('low', 'up', 'Too low! Try a higher number.');
-    addToHistory(guess, 'low', 'up');
-    setTempMeter(warmth);
+    setHint('low', '↑', 'Too low! Try a higher number.');
+    addToHistory(guess, 'low', '↑');
+
   } else if (guess > secretNumber) {
-    // Too high
-    if (guess < high) high = guess;
+    if (guess < high) high = guess; // narrow the range
     updateRange(low, high);
-    setHint('high', 'dn', 'Too high! Try a lower number.');
-    addToHistory(guess, 'high', 'dn');
-    setTempMeter(warmth);
+    setHint('high', '↓', 'Too high! Try a lower number.');
+    addToHistory(guess, 'high', '↓');
+
   } else {
     // Correct!
-    setHint('win', 'win', 'You found it! The number was ' + secretNumber + '.');
-    addToHistory(guess, 'correct', 'ok');
-    setTempMeter(100);
+    setHint('win', '✓', 'You found it!');
+    addToHistory(guess, 'correct', '✓');
     handleWin();
   }
 
@@ -105,85 +101,56 @@ function submitGuess() {
   input.focus();
 }
 
+// ===== HANDLE WIN =====
 function handleWin() {
   gameOver = true;
 
+  // Update best score if this game was better
   if (bestScore === null || attempts < bestScore) {
     bestScore = attempts;
   }
+  document.getElementById('best-score').textContent = bestScore + ' tries';
 
-  const bestEl = document.getElementById('best-score');
-  bestEl.textContent = bestScore + ' tries';
+  // Choose a rating message based on number of attempts
+  var rating;
+  if      (attempts <= 4)  rating = 'Incredible! Expert level! 🎉';
+  else if (attempts <= 7)  rating = 'Great job! Very impressive! 👏';
+  else if (attempts <= 10) rating = 'Well done! You figured it out! 😊';
+  else                     rating = 'You got there in the end! 💪';
 
-  let rating = '';
-  if (attempts <= 4) rating = 'Incredible! Expert level.';
-  else if (attempts <= 7) rating = 'Great job! Very impressive.';
-  else if (attempts <= 10) rating = 'Good work! You figured it out.';
-  else rating = 'Well done! You got there in the end.';
-
+  var plural = attempts === 1 ? '' : 's'; // "1 attempt" vs "2 attempts"
   document.getElementById('win-message').textContent =
-    'You guessed the number ' + secretNumber + ' in ' + attempts + ' attempt' + (attempts === 1 ? '' : 's') + '. ' + rating;
+    'You found ' + secretNumber + ' in ' + attempts + ' attempt' + plural + '. ' + rating;
 
-  document.getElementById('win-state').style.display = 'block';
-  document.getElementById('guess-area').style.display = 'none';
+  // Show win banner, hide input area
+  document.getElementById('win-state').style.display    = 'block';
+  document.getElementById('guess-area').style.display   = 'none';
   document.getElementById('game-actions').style.display = 'none';
-  document.getElementById('guess-input').disabled = true;
-  document.getElementById('submit-btn').disabled = true;
+  document.getElementById('guess-input').disabled       = true;
+  document.getElementById('submit-btn').disabled        = true;
 }
 
+// Called by the "Play Again" and "Start New Game" buttons
 function resetGame() {
   startNewGame();
 }
 
-// ===== HELPERS =====
+// ===== HELPER FUNCTIONS =====
 
-function getWarmth(distance) {
-  // 0 = cold (distance 50+), 100 = hot (distance 0)
-  if (distance === 0) return 100;
-  if (distance >= 50) return 0;
-  return Math.round(((50 - distance) / 50) * 100);
-}
-
-function setTempMeter(warmth) {
-  const fill = document.getElementById('temp-fill');
-  fill.style.width = warmth + '%';
-
-  if (warmth < 25) {
-    fill.style.background = '#90c8f0'; // cold blue
-  } else if (warmth < 50) {
-    fill.style.background = '#b5ead7'; // lukewarm mint
-  } else if (warmth < 75) {
-    fill.style.background = '#fdd9b5'; // warm peach
-  } else {
-    fill.style.background = '#f9c6d0'; // hot pink
-  }
-}
-
+// Update the hint box colour and message
 function setHint(type, iconText, message) {
-  const box = document.getElementById('hint-box');
-  const icon = document.getElementById('hint-icon');
-  const text = document.getElementById('hint-text');
+  var box  = document.getElementById('hint-box');
+  var icon = document.getElementById('hint-icon');
+  var text = document.getElementById('hint-text');
 
-  box.className = 'hint-box';
-  icon.textContent = '?';
-
-  if (type === 'high') {
-    box.classList.add('hint-high');
-    icon.textContent = 'v';
-    icon.style.transform = 'rotate(0deg)';
-  } else if (type === 'low') {
-    box.classList.add('hint-low');
-    icon.textContent = '^';
-  } else if (type === 'win') {
-    box.classList.add('hint-win');
-    icon.textContent = 'ok';
-    icon.style.fontSize = '0.75rem';
-  } else {
-    icon.style.fontSize = '1.1rem';
-    icon.style.transform = '';
-  }
-
+  // Reset classes, then add the right one
+  box.className    = 'hint-box';
+  icon.textContent = iconText;
   text.textContent = message;
+
+  if (type === 'high') box.classList.add('hint-high');
+  if (type === 'low')  box.classList.add('hint-low');
+  if (type === 'win')  box.classList.add('hint-win');
 }
 
 function updateAttempts(n) {
@@ -191,30 +158,25 @@ function updateAttempts(n) {
 }
 
 function updateRange(lo, hi) {
-  document.getElementById('range-display').textContent = lo + ' - ' + hi;
+  document.getElementById('range-display').textContent = lo + ' – ' + hi;
 }
 
 function clearHistory() {
-  const list = document.getElementById('history-list');
-  list.innerHTML = '<p class="no-guesses">No guesses yet. Give it a try!</p>';
+  document.getElementById('history-list').innerHTML =
+    '<p class="no-guesses">No guesses yet — give it a try!</p>';
 }
 
-function addToHistory(guess, type, arrow) {
-  const list = document.getElementById('history-list');
+// Add a new chip to the guess history list
+function addToHistory(guess, type, symbol) {
+  var list = document.getElementById('history-list');
 
-  // Remove the "no guesses" placeholder if present
-  const placeholder = list.querySelector('.no-guesses');
+  // Remove the placeholder text on the first guess
+  var placeholder = list.querySelector('.no-guesses');
   if (placeholder) placeholder.remove();
 
-  const chip = document.createElement('div');
+  var chip = document.createElement('div');
   chip.className = 'history-chip ' + type;
-
-  let arrowChar = '';
-  if (type === 'low') arrowChar = ' ^';
-  else if (type === 'high') arrowChar = ' v';
-  else arrowChar = ' ok';
-
-  chip.innerHTML = '<span>' + guess + '</span><span class="chip-arrow">' + arrowChar + '</span>';
+  chip.innerHTML = '<span>' + guess + '</span><span>' + symbol + '</span>';
   list.appendChild(chip);
 }
 
@@ -224,6 +186,5 @@ function showError(msg) {
 
 function clearError() {
   document.getElementById('input-error').textContent = '';
-  const input = document.getElementById('guess-input');
-  if (input) input.classList.remove('input-err');
+  document.getElementById('guess-input').classList.remove('input-err');
 }
