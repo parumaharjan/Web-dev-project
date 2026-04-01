@@ -1,45 +1,49 @@
-// ===== SHARED NAV FUNCTIONALITY =====
+// ===== NAV HAMBURGER MENU =====
+// This runs on every page to make the mobile menu work.
 
 document.addEventListener('DOMContentLoaded', function () {
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('nav-links');
 
+  // Grab the button and the list of links
+  var hamburger = document.getElementById('hamburger');
+  var navLinks  = document.getElementById('nav-links');
+
+  // If either element doesn't exist on this page, stop here
   if (!hamburger || !navLinks) return;
 
+  // Close the menu and reset the hamburger icon
+  function closeMenu() {
+    navLinks.classList.remove('open');
+    var spans = hamburger.querySelectorAll('span');
+    spans[0].style.transform = '';
+    spans[1].style.opacity   = '';
+    spans[2].style.transform = '';
+  }
+
+  // When hamburger is clicked, toggle (open/close) the menu
   hamburger.addEventListener('click', function () {
-    navLinks.classList.toggle('open');
-    // Animate hamburger lines
-    const spans = hamburger.querySelectorAll('span');
-    if (navLinks.classList.contains('open')) {
+    var isOpen = navLinks.classList.toggle('open');
+    var spans = hamburger.querySelectorAll('span');
+
+    if (isOpen) {
+      // Animate the three lines into an X
       spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-      spans[1].style.opacity = '0';
+      spans[1].style.opacity   = '0';
       spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
     } else {
-      spans[0].style.transform = '';
-      spans[1].style.opacity = '';
-      spans[2].style.transform = '';
+      closeMenu();
     }
   });
 
-  // Close menu when a link is clicked
+  // Close the menu when any nav link is clicked
   navLinks.querySelectorAll('a').forEach(function (link) {
-    link.addEventListener('click', function () {
-      navLinks.classList.remove('open');
-      const spans = hamburger.querySelectorAll('span');
-      spans[0].style.transform = '';
-      spans[1].style.opacity = '';
-      spans[2].style.transform = '';
-    });
+    link.addEventListener('click', closeMenu);
   });
 
-  // Close menu on outside click
+  // Close menu if user clicks anywhere outside it
   document.addEventListener('click', function (e) {
     if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-      navLinks.classList.remove('open');
-      const spans = hamburger.querySelectorAll('span');
-      spans[0].style.transform = '';
-      spans[1].style.opacity = '';
-      spans[2].style.transform = '';
+      closeMenu();
     }
   });
+
 });
